@@ -1,0 +1,16 @@
+FROM golang:1.23.1-alpine3.20
+
+# Set the Working Directory
+WORKDIR /app
+
+# Create a volume for persisting data
+VOLUME /root/.fabric
+
+# Install git (needed for alpine)
+RUN apk add --no-cache git
+
+# Install Fabric
+RUN go install github.com/danielmiessler/fabric@latest
+
+# Set the entrypoint to fabric
+ENTRYPOINT ["fabric"]
